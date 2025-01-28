@@ -1,3 +1,6 @@
+const TELGRAM_TOKEN = ""
+const CHAT_ID = ""
+
 function setupDailyTrigger() {
   ScriptApp.newTrigger("checkEventsAndNotify")
            .timeBased()
@@ -22,21 +25,18 @@ function checkEventsAndNotify() {
 }
 
 function sendTelegramMessage(message) {
-  const telegramToken = "YOUR_TOKEN";
-  const chatId = "YOUR_CHAT_ID";
   
   const payload = {
     method: "sendMessage",
-    chat_id: chatId,
+    chat_id: CHAT_ID,
     text: message
   };
   
   const options = {
-    method: 'post',
-    contentType: 'application/json',
+    method: "post",
+    contentType: "application/json",
     payload: JSON.stringify(payload)
   };
   
-  const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-  UrlFetchApp.fetch(url, options);
+  UrlFetchApp.fetch(`https://api.telegram.org/bot${TELGRAM_TOKEN}/sendMessage`, options);
 }
